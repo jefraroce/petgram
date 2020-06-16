@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Category } from '../Category'
 import { List, Item } from './styles'
 
-function useCategoriesData() {
+function useCategoriesData () {
   const [categories, setCategories] = useState([])
   const [loading, setLoading] = useState(false)
 
@@ -10,7 +10,7 @@ function useCategoriesData() {
   // para evitar que useEffect se ejecute infinitamente
   useEffect(() => {
     setLoading(true)
-    fetch('https://petgram-server-delta.vercel.app/categories')
+    window.fetch('https://petgram-server-delta.vercel.app/categories')
       .then(res => res.json())
       .then(categories => {
         setCategories(categories)
