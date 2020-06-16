@@ -44,6 +44,10 @@ const errorHandler = (err, req, res, next) => {
 app.use(errorHandler)
 server.applyMiddleware({ app, path: '/graphql' })
 
+app.get('/', function (req, res) {
+  res.send('Hola Jeisson :D')
+})
+
 app.get('/categories', function (req, res) {
   res.send(categories)
 })
