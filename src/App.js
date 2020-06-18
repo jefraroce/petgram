@@ -3,16 +3,13 @@ import { GlobalStyles } from './styles/GlobalStyles'
 import { Logo } from './components/Logo'
 import { Router } from '@reach/router'
 import { NavBar } from './components/NavBar'
+import Context from './Context'
 
 import { Home } from './pages/Home'
 import { Detail } from './pages/Detail'
 import { Favs } from './pages/Favs'
 import { User } from './pages/User'
 import { NotRegisteredUser } from './pages/NotRegisteredUser'
-
-const UserLogged = ({ children }) => {
-  return children({ isAuth: true })
-}
 
 export default () => {
   return (
@@ -25,21 +22,25 @@ export default () => {
         <Detail path='/detail/:detailId' />
       </Router>
 
-      <UserLogged>
+      <Context.Consumer>
         {
           ({ isAuth }) => (
             isAuth
-              ? <Router>
-                <Favs path='/favs' />
-                <User path='/user' />
-              </Router>
-              : <Router>
-                <NotRegisteredUser path='/favs' />
-                <NotRegisteredUser path='/user' />
-              </Router>
+              ? (
+                <Router>
+                  <Favs path='/favs' />
+                  <User path='/user' />
+                </Router>
+              )
+              : (
+                <Router>
+                  <NotRegisteredUser path='/favs' />
+                  <NotRegisteredUser path='/user' />
+                </Router>
+              )
           )
         }
-      </UserLogged>
+      </Context.Consumer>
       <NavBar />
     </div>
   )
