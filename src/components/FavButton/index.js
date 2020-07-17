@@ -2,8 +2,9 @@ import React, { useContext } from 'react'
 import { Context } from '../../Context'
 import { Button } from './styles'
 import { MdFavorite, MdFavoriteBorder } from 'react-icons/md'
+import PropTypes from 'prop-types'
 
-export const FavButton = ({ liked, likes, onClick }) => {
+const FavButton = ({ liked, likes, onClick }) => {
   const { isAuth } = useContext(Context)
   const Icon = liked ? MdFavorite : MdFavoriteBorder
 
@@ -21,3 +22,11 @@ export const FavButton = ({ liked, likes, onClick }) => {
     </Button>
   )
 }
+
+FavButton.propTypes = {
+  liked: PropTypes.bool.isRequired,
+  likes: PropTypes.number,
+  onClick: PropTypes.func
+}
+
+export { FavButton }
